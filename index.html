@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predikcije za ručak</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="header">  
+      <div>Dobrodosli u predikcije app</div>
+      <button id="admin">Admin placeholder</button>
+
+    </div>
+
+    <div id="body">        
+      <div id="instructions"> Ovde ce da idu instrukcije</div>
+      <div id="statusMsg"></div>
+      <form id="predictionForm">
+        <label for="name">Ime:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="time">Predvidjeno vreme:</label>
+        <input type="time" id="time" name="time"><br><br>
+        <input type="submit" id="submit" value="Submit">
+      </form> 
+
+      <div id="successMsg"></div>
+
+      <button id="refreshBtn">Refresh</button>
+
+      <table id="predictionsTable">
+        <thead>
+          <tr>
+              <th>Ime</th>
+              <th>Vreme</th>
+              <th>Prijavljeno u:</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Dynamic rows will be inserted here -->
+        </tbody>
+      </table>
+
+    </div>
+
+    <div id="results">
+      <h4>Poslednji pobednici:</h4>
+      <table id="winnersTable">
+        <thead>
+          <tr>
+              <th>Ime</th>
+              <th>Vreme</th>
+              <th>Datum pobede</th>
+          </tr>
+        </thead>
+        <tbody id="winnersTableBody">
+          <!-- Dynamic rows will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div id="adminPanel">
+      <label for="actualTime">Stvarno vreme dostave:</label>
+      <input type="time" id="actualTime">
+      <button id="setActual">Objavi vreme</button>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="./predictions_script.js"></script>
+  </body>
+</html>

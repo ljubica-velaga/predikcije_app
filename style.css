@@ -1,0 +1,63 @@
+/* Reset margins and make everything centered */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+/* Header row with title + admin button */
+#header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* title left, button right */
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Main content area */
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
+}
+
+table, th, td {
+  border: 1px solid #000;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Buttons */
+button, input[type="submit"] {
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#successMsg {
+  color: green;
+  font-weight: bold;
+}
+
