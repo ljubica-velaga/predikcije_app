@@ -23,6 +23,10 @@ let winnersTableBody = document.getElementById('winnersTableBody');
 let actualTime = document.getElementById('actualTime');
 let setActualTimeBtn = document.getElementById('setActual');
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const todayIso = today.toISOString()
+
 window.addEventListener('DOMContentLoaded', loadPredictions);
 window.addEventListener('DOMContentLoaded', loadWinners);
 
@@ -51,8 +55,11 @@ form.addEventListener('submit', async function(event) {
     .select();
 
     if (error) {
-        console.error("Insert error:", error);
-        alert("There was an error saving your prediction!");
+        if (error.message.includes("duplicate key")) {
+            alert("Tvoje ime i/ili vreme je već uneto danas!");
+        } else {
+            alert("There was an error submitting your prediction.");
+        }
     } else {
         console.log("Inserted data:", data);
         successMsg.textContent = "✅ Predikcija uspešno sačuvana!";
@@ -73,9 +80,6 @@ function validateForm(name, time) {
 }
 
 async function fetchPredictions() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayIso = today.toISOString()
 
     const { data, error } = await supabase
     .from('predictions')
@@ -194,21 +198,27 @@ function renderWinners(array) {
 setActualTimeBtn.addEventListener('click', () => checkForWinners());
 
 async function checkForWinners() {
-    const actualTime = actualTime.value
+  const arrivalTime = actualTime.value.trim();
+  if (!arrivalTime) {
+    alert("Morate uneti vreme!");
+    return;
+  }
 
-    const predictions = await fetchPredictions();
-    for (let prediction of predictions) {
-        if(prediction.predicted_time === actualTime) {
-            const { data, error } = await supabase  
-            .from('predictions')  
-            .update({ winner: true })  
-            .match({ name: prediction.name })
-            if (error) {
-                console.error("Insert error:", error);
-                alert("There was an error saving your time!");
-            } else {
-                console.log("Updated data:", data);
-            }
-        }
-    }
+  const { data, error } = await supabase
+    .from('predictions')
+    .update({ winner: true })
+    .eq('predicted_time', arrivalTime)
+    .gte('submitted_at', todayIso)
+    .select();
+
+  if (error) {
+    console.error("Update error:", error);
+    alert("There was an error updating winners!");
+  } else {
+    console.log("Updated winners:", data);
+    alert("Vreme je uspešno uneto, proveravamo da li je neko pobedio...");
+  }
+
+  loadWinners()
 }
+
