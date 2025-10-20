@@ -8,13 +8,13 @@
   </head>
   <body>
     <div id="header">  
-      <div>Dobrodosli u predikcije app</div>
-      <button id="admin">Admin placeholder</button>
-
+      <div>Dobrodošli u alfa verziju predikcije app</div>
+      <button id="admin">Admin</button>
     </div>
 
-    <div id="body">        
-      <div id="instructions"> Ovde ce da idu instrukcije</div>
+    <div id="body"> 
+      <p>Imajte u vidu da je razvoj i testiranje i dalje u toku! Ovo je tek početak.</p>       
+      <!-- <div id="instructions"> Ovde ce da idu instrukcije</div> -->
       <div id="statusMsg"></div>
       <form id="predictionForm">
         <label for="name">Ime:</label>
@@ -63,6 +63,8 @@
       <label for="actualTime">Stvarno vreme dostave:</label>
       <input type="time" id="actualTime">
       <button id="setActual">Objavi vreme</button>
+      <p>Ova sekcija će biti sakrivena u delu gde će samo admin imati pristup. Trenutno ovaj deo samo dodaje novog pobednika u tabelu (ukoliko pobednik postoji).</p>
+
     </div>
    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
