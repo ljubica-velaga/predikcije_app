@@ -129,8 +129,8 @@ function renderTable(array) {
 }
 
 function disableInputsOutsideTimespan() {
-    // const now = new Date();
-    const now = new Date(2025, 10, 16, 10, 59, 0, 0);
+    const now = new Date();
+    //const now = new Date(2025, 10, 16, 10, 59, 0, 0);
 
     const nowHr = now.getHours();
     const nowMin = now.getMinutes();
