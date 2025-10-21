@@ -64,3 +64,30 @@ button, input[type="submit"] {
   font-weight: bold;
 }
 
+.rules-card {
+  max-width: 700px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin: 40px auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  line-height: 1.6;
+}
+.rules-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #333;
+}
+.rules-card ol {
+  padding-left: 20px;
+}
+.rules-card li {
+  margin-bottom: 10px;
+  color: #444;
+}
+.rules-card strong {
+  color: #000;
+}
