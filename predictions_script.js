@@ -30,11 +30,11 @@ const todayIso = today.toISOString()
 window.addEventListener('DOMContentLoaded', loadPredictions);
 window.addEventListener('DOMContentLoaded', loadWinners);
 
-window.addEventListener('DOMContentLoaded', () => {
-    disableInputsOutsideTimespan();
-    // Recheck every minute
-    setInterval(disableInputsOutsideTimespan, 60 * 1000);
-});
+// window.addEventListener('DOMContentLoaded', () => {
+//     disableInputsOutsideTimespan();
+//     // Recheck every minute
+//     setInterval(disableInputsOutsideTimespan, 60 * 1000);
+// });
 
 form.addEventListener('submit', async function(event) {
   // Prevent the default form submission behavior (which causes page reload)
