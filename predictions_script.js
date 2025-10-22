@@ -85,7 +85,7 @@ async function fetchPredictions() {
     .from('predictions')
     .select('*')
     .gte('submitted_at', todayIso)
-    .order('submitted_at', { ascending: false }); // newest first
+    .order('predicted_time', { ascending: true }); // newest first
 
     if (error) {
         console.error("Error fetching predictions:", error);
