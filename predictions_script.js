@@ -5,6 +5,15 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
 let adminBtn = document.getElementById('admin');
+let modal = document.getElementById("modal");
+let closeModal = document.getElementsByClassName("close")[0];
+let adminConfirmationBlock = document.getElementById('adminConfirmation');
+let adminPassInp = document.getElementById('adminPassInp');
+let adminPassBtn = document.getElementById('adminPassBtn');
+let adminPanelBlock = document.getElementById("adminPanel");
+
+let actualTime = document.getElementById('actualTime');
+let setActualTimeBtn = document.getElementById('setActual');
 
 let form = document.getElementById("predictionForm");
 let nameInputField = document.getElementById('name');
@@ -20,9 +29,6 @@ let successMsg = document.getElementById("successMsg");
 let winnersTable = document.getElementById('winnersTable');
 let winnersTableBody = document.getElementById('winnersTableBody');
 
-let actualTime = document.getElementById('actualTime');
-let setActualTimeBtn = document.getElementById('setActual');
-
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 const todayIso = today.toISOString()
@@ -30,11 +36,11 @@ const todayIso = today.toISOString()
 window.addEventListener('DOMContentLoaded', loadPredictions);
 window.addEventListener('DOMContentLoaded', loadWinners);
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     disableInputsOutsideTimespan();
-//     // Recheck every minute
-//     setInterval(disableInputsOutsideTimespan, 60 * 1000);
-// });
+window.addEventListener('DOMContentLoaded', () => {
+    disableInputsOutsideTimespan();
+    // Recheck every minute
+    setInterval(disableInputsOutsideTimespan, 60 * 1000);
+});
 
 form.addEventListener('submit', async function(event) {
   // Prevent the default form submission behavior (which causes page reload)
@@ -130,8 +136,6 @@ function renderTable(array) {
 
 function disableInputsOutsideTimespan() {
     const now = new Date();
-    //const now = new Date(2025, 10, 16, 10, 59, 0, 0);
-
     const nowHr = now.getHours();
     const nowMin = now.getMinutes();
 
@@ -141,9 +145,11 @@ function disableInputsOutsideTimespan() {
     if((openHr <= nowHr && nowHr<= closeHr - 1) || (nowHr === closeHr && nowMin === 0)) {
         nameInputField.disabled = false;
         timeInputField.disabled = false;
+        submitBtn.disabled = false;
     } else {
         nameInputField.disabled = true;
         timeInputField.disabled = true;
+        submitBtn.disabled = true;
         statusMsg.textContent = "Predikcije su zatvorene. Vrati se na stranicu između 9:00 i 12:00.";
     }
 }
@@ -195,6 +201,31 @@ function renderWinners(array) {
     };
 }
 
+adminPanelBlock.style.display = "none";
+
+adminBtn.onclick = function() {
+  modal.style.display = "block";
+}
+
+closeModal.onclick = function() {
+    adminConfirmationBlock.style.display = "block";
+    adminPanelBlock.style.display = "none"
+    modal.style.display = "none";
+}
+
+adminPassBtn.onclick = function() {
+    let ap = adminPassInp.value.trim();
+    if(!ap) {
+        alert("Morate uneti admin šifru!");
+    } else if(ap === "wfae8907!") {
+        adminConfirmationBlock.style.display = "none";
+        adminPanelBlock.style.display = "block"
+    } else {
+        alert("Pogrešna šifra!");
+    }
+    adminPassInp.value = '';
+}
+
 setActualTimeBtn.addEventListener('click', () => checkForWinners());
 
 async function checkForWinners() {
@@ -216,7 +247,7 @@ async function checkForWinners() {
     alert("There was an error updating winners!");
   } else {
     console.log("Updated winners:", data);
-    alert("Vreme je uspešno uneto, proveravamo da li je neko pobedio...");
+    alert("Vreme je uspešno uneto, ukoliko je neko pobedio biće automatski dodat u tabelu sa pobednicima.");
   }
 
   loadWinners()

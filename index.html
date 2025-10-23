@@ -4,29 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Predikcije za ručak</title>
+    <link rel="icon" type="image/svg+xml" href="assets\favicon.svg">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="header">  
-      <div>Dobrodošli u alfa verziju predikcije app</div>
+      <img src="assets\logo.png" alt="logo" class="logo">
+      <div>Dobrodošli u β-verziju predikcije app</div>
       <button id="admin">Admin</button>
     </div>
 
     <div id="body"> 
-      <p>Imajte u vidu da je razvoj i testiranje i dalje u toku! Ovo je tek početak.</p>       
+      <p>Imajte u vidu da je razvoj i testiranje i dalje u toku!</p>       
       <!-- <div id="instructions"> Ovde ce da idu instrukcije</div> -->
       <div id="statusMsg"></div>
       <form id="predictionForm">
         <label for="name">Ime:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="time">Predvidjeno vreme:</label>
-        <input type="time" id="time" name="time"><br><br>
-        <input type="submit" id="submit" value="Submit">
+        <input type="text" id="name" name="name">
+        
+        <div class="time-row">
+          <label for="time">Predviđeno vreme:</label>
+          <input type="time" id="time" name="time">
+        </div>
+        
+        <input type="submit" id="submit" value="Pošalji predikciju">
       </form> 
 
       <div id="successMsg"></div>
 
-      <button id="refreshBtn">Refresh</button>
+      <button id="refreshBtn">Osveži tabelu sa predikcijama</button>
 
       <table id="predictionsTable">
         <thead>
@@ -74,12 +80,19 @@
       </ol>
     </div>
     
-    <div id="adminPanel">
-      <label for="actualTime">Stvarno vreme dostave:</label>
-      <input type="time" id="actualTime">
-      <button id="setActual">Objavi vreme</button>
-      <p>Ova sekcija će biti sakrivena u delu gde će samo admin imati pristup. Trenutno ovaj deo samo dodaje novog pobednika u tabelu (ukoliko pobednik postoji).</p>
-
+    <div id="modal" class="modal" style="display: none">
+      <div id="adminConfirmation">
+        <label for="adminPassInp">Unesi admin šifru:</label>
+        <input type="password" id="adminPassInp">
+        <button id="adminPassBtn">Uloguj se kao admin</button>
+      </div>
+      <div id="adminPanel">
+        <label for="actualTime">Stvarno vreme dostave:</label>
+        <input type="time" id="actualTime">
+        <button id="setActual">Objavi vreme</button>
+      </div>
+      
+      <span class="close">&times;</span>
     </div>
    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

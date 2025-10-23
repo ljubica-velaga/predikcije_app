@@ -1,93 +1,319 @@
-/* Reset margins and make everything centered */
-body {
+/* ----------------------------- */
+/*  COLOR PALETTE                */
+/* ----------------------------- */
+/*
+Background:   #FFF4E8  (soft peach)
+Header:       #FFD7B5  (warm apricot)
+Accent:       #FF8C42  (vibrant orange)
+Accent Hover: #FF9E5C  (lighter orange)
+Text:         #2B2B2B  (dark neutral)
+Borders:      #F1C59E  (soft beige)
+Card:         #FFFFFF  (white)
+Subtle BG:    #FFF9F4  (very light peach)
+*/
+
+/* ----------------------------- */
+/*  GENERAL RESET AND BASE STYLE */
+/* ----------------------------- */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
-  text-align: center;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #FFF4E8;
+  color: #2B2B2B;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
   gap: 40px;
-  padding: 20px;
+  min-height: 100vh;
 }
 
-/* Header row with title + admin button */
+/* ----------------------------- */
+/*  HEADER AREA                  */
+/* ----------------------------- */
 #header {
   width: 100%;
+  max-width: 900px;
   display: flex;
-  justify-content: space-between; /* title left, button right */
   align-items: center;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  font-size: 24px;
-  font-weight: bold;
-}
-p {
-  font-size: 12px;
+  justify-content: space-between;
+  background: #FFD7B5;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #F1C59E;
 }
 
-/* Main content area */
+#header div {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2B2B2B;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* ----------------------------- */
+/*  BODY CONTENT                 */
+/* ----------------------------- */
 #body {
+  width: 100%;
+  max-width: 600px;
+  background: #FFF9F4;
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid #F1C59E;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  font-size: 16px;
-  max-width: 600px;
+}
+
+#body p {
+  font-size: 14px;
+  color: #5c4a3f;
+  text-align: center;
+}
+
+/* ----------------------------- */
+/*  FORM STYLING                 */
+/* ----------------------------- */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3a2c1f;
+  margin-bottom: 4px;
+}
+
+/* name field */
+#name {
   width: 100%;
 }
 
-/* Table styling */
+input[type="text"],
+input[type="time"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #F1C59E;
+  background-color: #fff;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="time"]:focus {
+  border-color: #FF8C42;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+}
+
+/* time row layout */
+.time-row {
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* ----------------------------- */
+/*  BUTTONS                      */
+/* ----------------------------- */
+button,
+input[type="submit"] {
+  background: #FF8C42;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #FF9E5C;
+  transform: translateY(-1px);
+}
+
+button:active,
+input[type="submit"]:active {
+  background: #E6762A;
+  transform: translateY(0);
+}
+
+#refreshBtn {
+  background: #FFD7B5;
+  color: #2B2B2B;
+}
+
+#refreshBtn:hover {
+  background: #FFCEA3;
+}
+
+/* ----------------------------- */
+/*  SUCCESS & STATUS MESSAGES    */
+/* ----------------------------- */
+#successMsg {
+  color: #2E8B57;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#statusMsg {
+  color: #704f3e;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ----------------------------- */
+/*  TABLES                       */
+/* ----------------------------- */
 table {
   border-collapse: collapse;
   width: 100%;
   max-width: 600px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #F1C59E;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-table, th, td {
-  border: 1px solid #000;
-}
-
-th, td {
+th {
+  background: #FFD7B5;
+  color: #3a2c1f;
   padding: 10px;
-  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  text-align: left;
 }
 
-/* Buttons */
-button, input[type="submit"] {
-  padding: 4px 8px;
+td {
+  padding: 10px;
+  border-bottom: 1px solid #F1C59E;
   font-size: 14px;
-  cursor: pointer;
 }
 
-#successMsg {
-  color: green;
-  font-weight: bold;
+tbody tr:nth-child(even) {
+  background: #FFF9F4;
 }
 
+/* ----------------------------- */
+/*  RESULTS SECTION              */
+/* ----------------------------- */
+#results {
+  width: 100%;
+  max-width: 600px;
+  background: #FFF9F4;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #F1C59E;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#results h4 {
+  margin-bottom: 16px;
+  color: #3a2c1f;
+  font-size: 18px;
+}
+
+/* ----------------------------- */
+/*  RULES CARD                   */
+/* ----------------------------- */
 .rules-card {
   max-width: 700px;
-  background-color: #fafafa;
-  border: 1px solid #ddd;
+  background-color: #FFF9F4;
+  border: 1px solid #F1C59E;
   border-radius: 12px;
   padding: 24px 32px;
   margin: 40px auto;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   line-height: 1.6;
 }
+
 .rules-card h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.6rem;
-  color: #333;
+  color: #3a2c1f;
 }
-.rules-card ol {
-  padding-left: 20px;
-}
+
 .rules-card li {
   margin-bottom: 10px;
-  color: #444;
+  color: #4a3b31;
 }
-.rules-card strong {
-  color: #000;
+
+/* ----------------------------- */
+/*  ADMIN MODAL                  */
+/* ----------------------------- */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFF9F4;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #F1C59E;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 8px;
+  color: #3a2c1f;
+  font-weight: 500;
+}
+
+.modal input[type="time"],
+.modal input[type="password"] {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.modal button {
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 20px;
+  color: #b5764e;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: #3a2c1f;
 }
