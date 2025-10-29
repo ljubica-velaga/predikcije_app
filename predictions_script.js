@@ -190,11 +190,12 @@ function renderWinners(array) {
         timeCell.textContent = rowData.predicted_time;
         row.appendChild(timeCell);
 
-        const isoString = rowData.submitted_at;
-        const dateObject = new Date(isoString);
-        const humanReadableDateTime = dateObject.getDay();
+        // const isoString = rowData.submitted_at;
+        // const dateObject = new Date(isoString);
+        // const humanReadableDateTime = dateObject.getDay();
         const submittedCell = document.createElement('td');
-        submittedCell.textContent = dateObject.getUTCDate() + '.' + dateObject.getUTCMonth() + '.' + dateObject.getUTCFullYear() + '.';
+        // submittedCell.textContent = dateObject.getUTCDate() + '.' + dateObject.getUTCMonth() + '.' + dateObject.getUTCFullYear() + '.';
+        submittedCell.textContent = rowData.submitted_date;
         row.appendChild(submittedCell);
 
         winnersTableBody.appendChild(row);
