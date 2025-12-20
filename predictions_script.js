@@ -1,7 +1,7 @@
 // Initialize Supabase client
 const supabaseUrl = "https://fgxbcpdyubvzkcdroubn.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZneGJjcGR5dWJ2emtjZHJvdWJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk4NjY0MzEsImV4cCI6MjA3NTQ0MjQzMX0.xH-dUDqeez5X90rQ6CIviMlYwfggN_6uwRVee07Y3I8";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+const sb = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
 let adminBtn = document.getElementById('admin');
@@ -54,7 +54,7 @@ form.addEventListener('submit', async function(event) {
     return;
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await sb
     .from('predictions')
     .insert([
         { name: name, predicted_time: time, submitted_at: submittedAt}])
@@ -87,7 +87,7 @@ function validateForm(name, time) {
 
 async function fetchPredictions() {
 
-    const { data, error } = await supabase
+    const { data, error } = await sb
     .from('predictions')
     .select('*')
     .gte('submitted_at', todayIso)
@@ -155,7 +155,7 @@ function disableInputsOutsideTimespan() {
 }
 
 async function fetchWinners() {
-    const { data, error } = await supabase
+    const { data, error } = await sb
     .from('predictions')
     .select('*')
     .eq('winner', true)
@@ -236,7 +236,7 @@ async function checkForWinners() {
     return;
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await sb
     .from('predictions')
     .update({ winner: true })
     .eq('predicted_time', arrivalTime)
