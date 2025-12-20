@@ -7,10 +7,10 @@ const sb = window.supabase.createClient(supabaseUrl, supabaseKey);
 let adminBtn = document.getElementById('admin');
 let modal = document.getElementById("modal");
 let closeModal = document.getElementsByClassName("close")[0];
-let adminConfirmationBlock = document.getElementById('adminConfirmation');
+let adminPassEntryBlock = document.getElementById('adminConfirmation');
 let adminPassInp = document.getElementById('adminPassInp');
 let adminPassBtn = document.getElementById('adminPassBtn');
-let adminPanelBlock = document.getElementById("adminPanel");
+let adminActualTimeEntryBlock = document.getElementById("adminPanel");
 
 let actualTime = document.getElementById('actualTime');
 let setActualTimeBtn = document.getElementById('setActual');
@@ -202,15 +202,15 @@ function renderWinners(array) {
     };
 }
 
-adminPanelBlock.style.display = "none";
+adminActualTimeEntryBlock.style.display = "none";
 
 adminBtn.onclick = function() {
   modal.style.display = "block";
 }
 
 closeModal.onclick = function() {
-    adminConfirmationBlock.style.display = "block";
-    adminPanelBlock.style.display = "none"
+    adminPassEntryBlock.style.display = "block";
+    adminActualTimeEntryBlock.style.display = "none"
     modal.style.display = "none";
 }
 
@@ -219,22 +219,30 @@ adminPassBtn.onclick = function() {
     if(!ap) {
         alert("Morate uneti admin šifru!");
     } else if(ap === "wfae8907!") {
-        adminConfirmationBlock.style.display = "none";
-        adminPanelBlock.style.display = "block"
+        adminPassEntryBlock.style.display = "none";
+        adminActualTimeEntryBlock.style.display = "block"
     } else {
         alert("Pogrešna šifra!");
     }
     adminPassInp.value = '';
 }
 
-setActualTimeBtn.addEventListener('click', () => checkForWinners());
+setActualTimeBtn.onclick = function() {
+    const arrivalTime = actualTime.value.trim();
+    if (!arrivalTime) {
+        alert("Morate uneti vreme!");
+        return;
+    } else {
+        checkForWinners(arrivalTime);
+        modal.style.display = "none";
+        adminPassEntryBlock.style.display = "block";
+        adminActualTimeEntryBlock.style.display = "none"
+    }
+    actualTime.value = "";
+    
+};
 
-async function checkForWinners() {
-  const arrivalTime = actualTime.value.trim();
-  if (!arrivalTime) {
-    alert("Morate uneti vreme!");
-    return;
-  }
+async function checkForWinners(arrivalTime) {
 
   const { data, error } = await sb
     .from('predictions')
